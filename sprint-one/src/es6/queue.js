@@ -5,7 +5,15 @@ class Queue {
   	this.storage = {};
   }
 
-  enqueue( value ){ }
+  enqueue( value ){
+  	var iMax = this.size() -1;
+  	if( iMax !== -1 ) {
+  		for ( var i = iMax; i >= 0; i-- ){
+  			this.storage[i+1] = this.storage[i];
+  		}
+  	}
+  	this.storage[0] = value;
+  }
 
   dequeue( ){ }
 
