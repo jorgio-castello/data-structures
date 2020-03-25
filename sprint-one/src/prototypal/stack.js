@@ -8,10 +8,14 @@ var stackMethods = {
 	'push': function( value ) {
 		let nextKey = this.size();
 		this.storage[nextKey] = value;
-	//do things
 	},
 	'pop': function() {
-	//do things
+		let lastKey = this.size() -1;
+		if ( lastKey > -1 ) {
+			let poppedValue = this.storage[lastKey];
+			delete this.storage[lastKey];
+			return poppedValue;
+		}
 	},
 	'size': function(){ 
 		return Object.keys(this.storage).length;
