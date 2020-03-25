@@ -19,7 +19,10 @@ var queueMethods = {
 		this.storage[0] = value;
 	},
 	dequeue( ){
-
+		var lastIndex = this.size() -1;
+		var dequeuedValue = this.storage[lastIndex];
+		delete this.storage[lastIndex];
+		return dequeuedValue;
 	}
 };
 
