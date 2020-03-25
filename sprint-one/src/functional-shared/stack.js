@@ -11,6 +11,7 @@ var Stack = function() {
 	} 
 
 	someInstance.size = function () {
+		return Object.keys(storage).length;
 		//do stuff
 	}
   // Hey! Rewrite in the new style. Your code will wind up looking very similar,
