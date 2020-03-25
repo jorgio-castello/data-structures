@@ -6,13 +6,18 @@ var Queue = function() {
 
 var queueMethods = {
 	size(){
-
-	}
+		return Object.keys(this.storage).length;
+	},
 
 	enqueue( value ){
-
-	}
-
+		var lastIndex = this.size() - 1;
+		if( lastIndex >= 0 ) {
+			for( var i = lastIndex; i >= 0; i-- ) {
+				this.storage[i+1] = this.storage[i];
+			}
+		}
+		this.storage[0] = value;
+	},
 	dequeue( ){
 
 	}
