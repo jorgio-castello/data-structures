@@ -9,6 +9,8 @@ class Queue {
 
   dequeue( ){ }
 
-  size( ){ }
+  size(){
+  	return Object.keys( this.storage ).length;
+  }
 
 }
