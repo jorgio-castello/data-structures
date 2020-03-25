@@ -2,7 +2,6 @@ var Stack = function() {
 	this.storage = {};
 };
 
-
 Stack.prototype = {
 	'constructor': Stack,
 	'push' : function( value ){
