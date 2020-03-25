@@ -1,7 +1,7 @@
 var Queue = function() {
 	var queue = {};
 	queue.storage = {};
-	Object.assign( queue, queueMethods );
+	_.extend( queue, queueMethods );
 	return queue;
  };
 

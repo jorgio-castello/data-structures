@@ -1,7 +1,7 @@
 var Stack = function() {
 	var someInstance = {};
 	someInstance.storage = {};
-	Object.assign( someInstance, stackMethods );
+	_.extend( someInstance, stackMethods );
 	return someInstance;
 };
 
