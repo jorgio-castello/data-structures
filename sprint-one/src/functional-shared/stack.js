@@ -8,7 +8,12 @@ var Stack = function() {
 	}
 
 	someInstance.pop = function () {
-		//do stuff
+	  var indexToDelete = someInstance.size() -1;
+	  if ( indexToDelete > -1 ) {
+	  	let poppedValue = storage[indexToDelete];
+	  	delete storage[indexToDelete];
+	  	return poppedValue;
+	  }
 	} 
 
 	someInstance.size = function () {
