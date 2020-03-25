@@ -15,7 +15,12 @@ class Queue {
   	this.storage[0] = value;
   }
 
-  dequeue( ){ }
+  dequeue( ){
+  	var i = this.size() -1;
+  	var dequeuedValue = this.storage[i];
+  	delete this.storage[i];
+  	return dequeuedValue;
+  }
 
   size(){
   	return Object.keys( this.storage ).length;
