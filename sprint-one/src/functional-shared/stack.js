@@ -2,15 +2,15 @@ var Stack = function() {
 	var someInstance = {};
 	var storage = {};
 
-	var someInstance.push = function () {
+	someInstance.push = function () {
 		//do stuff
 	}
 
-	var someInstance.pop = function () {
+	someInstance.pop = function () {
 		//do stuff
 	} 
 
-	var someInstance.size = function () {
+	someInstance.size = function () {
 		//do stuff
 	}
   // Hey! Rewrite in the new style. Your code will wind up looking very similar,
