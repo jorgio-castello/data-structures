@@ -1,0 +1,54 @@
+Description of Stack
+Stack is a data-structure that exists an object.
+Stack operates on a last-in-first-out basis
+
+Stack has the following:
+A storage property - initially assigned an empty object, which can be
+given properties in the following format:
+  Key - an index, the first item pushed into a Stack will be 0
+  Value - the value that is pushed into the Stack
+Push Method - pushes items into the storage object of Stack
+Pop Method - removes items from the storage object of Stack
+Size Method - calculates the number of properties in the storage object of Stack
+
+Description of Queue
+Queue is a data structure that exists as an object
+Queue operates on a first-in-first-out basis
+
+Queue has the following:
+A storage property - initially assigned an empty object, which can be given properties
+in the following format:
+  Key - an index, the item pushed into a Queue will be 0
+  Value - the value that is pushed into the Queue
+Enqueue method - this method shifts existing property indices forward an index, and places
+the new value at index 0 of the storage object
+Dequeue method - removes the last item from the storage object
+Size method - calculates the number of properties in the storage object of Queue
+
+Description of Class Instantiation Patterns Used in This Sprint
+Functional Instantiation
+The declaration of all object properties exists within the function definition
+The downside is that if there are a TON of calls to this Class definition, a bunch of
+methods will be duplicated in memory
+
+Functional-Shared Instantiation
+This instantiation pattern declares methods outside of the class definition
+The object class will then point properties to those method definitions
+The benefit of using functional-shared is that methods are defined once, and will
+not result in methods repeatedly existing in memory
+
+Prototypal Pattern
+This instantiation pattern uses Object.create(), and passes a methods object to that
+the Object.create invocation
+This method is simpler than passing those methods to the instance object in the aforementioned
+patterns
+
+Pseudoclassical Pattern
+This pattern is invoked using the new keyword
+Using new indicates that within the class invocation, Object.create should be invoked on
+Class.prototype - methods for the instance can be defined as Class.prototype.method
+
+ES6 Class Instantiation
+Instead of invoking a function, invoke a Class instantiation
+Within the constructor function, declare non-method properties on this
+Included functions within the Class instantiation will be considered as methods on the instance object
