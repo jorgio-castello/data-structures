@@ -1,29 +1,29 @@
 var Stack = function() {
 	var someInstance = {};
-	var storage = {};
-
-	someInstance.push = function ( value ) {
-		var nextKey = someInstance.size();
-		storage[nextKey] = value;
-	}
-
-	someInstance.pop = function () {
-	  var indexToDelete = someInstance.size() -1;
-	  if ( indexToDelete > -1 ) {
-	  	let poppedValue = storage[indexToDelete];
-	  	delete storage[indexToDelete];
-	  	return poppedValue;
-	  }
-	} 
-
-	someInstance.size = function () {
-		return Object.keys(storage).length;
-	}
-  // Hey! Rewrite in the new style. Your code will wind up looking very similar,
-  // but try not not reference your old code in writing the new style.
-  return someInstance;
+	someInstance.storage = {};
+	Object.assign( someInstance, stackMethods );
+	return someInstance;
 };
 
-var stackMethods = {};
+var stackMethods = {
+
+	'push': function ( value ) {
+		var nextKey = this.size();
+		this.storage[nextKey] = value;
+	},
+
+	'pop': function () {
+	  var indexToDelete = this.size() -1;
+	  if ( indexToDelete > -1 ) {
+	  	let poppedValue = this.storage[indexToDelete];
+	  	delete this.storage[indexToDelete];
+	  	return poppedValue;
+	  }
+	},
+
+	'size': function () {
+		return Object.keys(this.storage).length;
+	}
+};
 
 
