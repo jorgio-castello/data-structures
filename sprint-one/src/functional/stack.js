@@ -21,9 +21,12 @@ var Stack = function() {
       return;
     }
     console.log( "Pop running, we gotta delete " + keyName + " which holds " + storage[keyName]);
+    let returnValue = storage[keyName];
     delete storage[keyName];
-    console.log( "Pop done~" );
+
+    console.log( "Pop done~ We have popped off:" + returnValue );
     console.log( storage );
+    return returnValue;
   };
 
   someInstance.size = function() {
