@@ -42,7 +42,12 @@ Graph.prototype.findNode = function(node) {
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
   // TODO: do we want to cascade through what points to this?
-
+  var nodeId = this.findNode(node);
+  for( var i = 0; i < this.nodes.length; i++ ) {
+    if( this.nodes[i].id === nodeId ) {
+      this.nodes.splice(i, 1);
+    }
+  }
 };
 
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
