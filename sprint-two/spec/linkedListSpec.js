@@ -59,14 +59,13 @@ describe('linkedList', function() {
     linkedList.addToTail(3);
     linkedList.addToTail(4);
     linkedList.insertNode(5, 2);
-    console.log(linkedList);
+
     let expectedList = LinkedList();
     expectedList.addToTail(1);
     expectedList.addToTail(2);
     expectedList.addToTail(5);
     expectedList.addToTail(3);
     expectedList.addToTail(4);
-    console.log(expectedList);
 
     expect(linkedList).to.deep.equal(expectedList);
   });
