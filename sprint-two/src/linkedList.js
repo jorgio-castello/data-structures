@@ -22,6 +22,24 @@ var LinkedList = function() {
     }
   };
 
+  list.insertNode = function ( newValue, targetValue ) {
+    if( list.contains( targetValue ) ) {
+      let newNode = Node ( newValue );
+      function traverseNode( node ) {
+        if( node.value === targetValue ) {
+          // insert it here
+          newNode.next = node.next;
+          node.next = newNode;
+        } else {
+         traverseNode( node.next );
+        }
+      }
+      traverseNode( list.head );
+    } else {
+      console.log( "List does not contain " + target );
+    }
+  }
+
   list.removeHead = function() {
     let formerHead = list.head.value;
     list.head = list.head.next;
@@ -57,3 +75,5 @@ var Node = function(value) {
 /*
  * Complexity: What is the time complexity of the above functions?
  */
+
+
