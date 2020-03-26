@@ -11,9 +11,7 @@ var graphNode = function(value, id) {
   this.value = value;
   this.PointsTo = [];
 }
-/*
 
-*/
 
 // Add a node to the graph, passing in the node's value.
 Graph.prototype.addNode = function(node) {
@@ -24,10 +22,27 @@ Graph.prototype.addNode = function(node) {
 
 // Return a boolean value indicating if the value passed to contains is represented in the graph.
 Graph.prototype.contains = function(node) {
+  for(let i = 0; i < this.nodes.length; i++) {
+    if(this.nodes[i].value === node) {
+      return true;
+    }
+  }
+  return false;
 };
+
+Graph.prototype.findNode = function(node) {
+  for( let i = 0; i < this.nodes.length; i++ ) {
+    if( this.nodes[i].value == node ) {
+      return this.nodes[i].id;
+    }
+  }
+  return -1;
+}
 
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
+  // TODO: do we want to cascade through what points to this?
+
 };
 
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.

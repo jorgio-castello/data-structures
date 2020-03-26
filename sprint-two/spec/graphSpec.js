@@ -20,6 +20,19 @@ describe('graph', function() {
     expect(graph.contains(1)).to.equal(true);
   });
 
+  it('should return the ID of a node that is searched for', function(){
+    for( var i = 0; i < 5; i ++ ){
+      graph.addNode(i);
+    }
+    expect(graph.findNode(2)).to.equal(2);
+  });
+  it('should return -1 for a node that does not exist when searched for', function() {
+    for( var i = 0; i < 5; i ++ ){
+      graph.addNode(i);
+    }
+    expect(graph.findNode(17)).to.equal(-1);
+  })
+
   it('should remove nodes that were inserted', function() {
     graph.addNode(2);
     expect(graph.contains(2)).to.equal(true);
