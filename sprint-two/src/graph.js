@@ -1,12 +1,26 @@
 
-
 // Instantiate a new graph
 var Graph = function() {
+  //Default property / properties
+  this.nodes = [];
+  this.nextID = 0;
 };
+
+var graphNode = function(value, id) {
+  this.id = id;
+  this.value = value;
+  this.PointsTo = [];
+}
+/*
+
+*/
 
 // Add a node to the graph, passing in the node's value.
 Graph.prototype.addNode = function(node) {
-};
+  let newNode = new graphNode( node,  this.nextID );
+  this.nodes.push(newNode);
+  this.nextID++;
+ };
 
 // Return a boolean value indicating if the value passed to contains is represented in the graph.
 Graph.prototype.contains = function(node) {
