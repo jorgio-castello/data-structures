@@ -53,7 +53,7 @@ describe('linkedList', function() {
 
   //1,2,3,4
   //then, insert 5 at '2'
-  it('should insert a node after a specific target value', function() {
+/*  it('should insert a node after a specific target value', function() {
     linkedList.addToTail(1);
     linkedList.addToTail(2);
     linkedList.addToTail(3);
@@ -68,7 +68,7 @@ describe('linkedList', function() {
     expectedList.addToTail(4);
 
     expect(linkedList).to.deep.equal(expectedList);
-  });
+  });*/
 
   // add more tests here to test the functionality of linkedList
 });
