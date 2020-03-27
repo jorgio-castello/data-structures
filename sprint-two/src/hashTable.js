@@ -2,32 +2,75 @@
 var HashTable = function() {
   this.limit = 8;
   this.hash = LimitedArray(this.limit);
+  this.count = 0;
 };
 
 HashTable.prototype.insert = function(k, v) {
+  //check the bucket for a tuple that has that key
   var index = getIndexBelowMaxForKey(k, this.limit);
-  this.hash.storage[index].push([k, v]);
-  // we need to check if we are at 25% or 75% capacity after adding something
-  // reHashTable() is in helper funcs but not defined
+  //k = "Steven", this.limit = 8, returns 3
+
+  var bucket = this.hash.storage[index];
+  // whatever's at 3 right now, which is empty
+
+  if ( bucket.length === 0 ) { //true
+    this.count++; // count is 1
+    if (this.checkCapacity() > .75) {
+      this.limit *= 2;
+      this.hash = this.increaseCapacity(this.limit);
+    }
+  }
+  var reassign = false;
+
+  for ( var i = 0; i < bucket.length; i ++ ) { //0
+    if ( bucket[i][0] === k ) {
+      bucket[i][1] = v;
+      reassign = true;
+    }
+  }
+  if ( !reassign ) {
+    this.hash.storage[index].push([k, v]);
+  }
 };
 
 HashTable.prototype.retrieve = function(k) {
   var index = getIndexBelowMaxForKey(k, this.limit);
   let bucket = this.hash.storage[index];
-  debugger;
-  for(let i = 0; i < bucket.length; i++) {
-    if(bucket[i][0] === k) {
+  for (let i = 0; i < bucket.length; i++) {
+    if (bucket[i][0] === k) {
       return bucket[i][1];
     }
   }
 };
 
 HashTable.prototype.remove = function(k) {
-  var index = getIndexBelowMaxForKey(k, this._limit);
-    // we need to check if we are at 25% or 75% capacity after adding something
-    // reHashTable() is in helper funcs but not defined
+  var index = getIndexBelowMaxForKey(k, this.limit);
+  let bucket = this.hash.storage[index];
+  let bucketIdxToDelete = -1;
+  for (let i = 0; i < bucket.length; i++) {
+    if (bucket[i][0] === k) {
+      bucketIdxToDelete = i;
+    }
+  }
+  if (bucketIdxToDelete > -1) {
+    bucket.splice(bucketIdxToDelete, 1);
+  }
 };
 
+HashTable.prototype.checkCapacity = function() {
+  return this.count / this.limit;
+};
+HashTable.prototype.increaseCapacity = function() {
+  let doubleSizedHash = LimitedArray(this.limit);
+  this.each( function(bucket) {
+    for (let i = 0; i < bucket.length; i++) {
+      doubleSizeHash.insert(bucket[i][0], bucket[i][1]);
+    }
+  });
+  return doubleSizedHash;
+};
+
+HashTable.prototype.decreaseCapacity = function () {};
 
 
 /*
