@@ -39,7 +39,7 @@ Graph.prototype.findNode = function(node) {
   return -1;
 };
 
-// Removes a node from the graph.
+// Removes a node from the graph.q
 Graph.prototype.removeNode = function(node) {
   // TODO: do we want to cascade through what points to this?
   var nodeId = this.findNode(node);
@@ -59,6 +59,7 @@ Graph.prototype.hasEdge = function(fromNode, toNode) {
       return this.nodes[i].pointsTo.includes( toNodeId );
     }
   }
+  return false;
 };
 
 // Connects two nodes in a graph by adding an edge between them.
@@ -72,9 +73,9 @@ Graph.prototype.addEdge = function(fromNode, toNode) {
       //push toNodeId into the found node's pointsTo array
       this.nodes[i].pointsTo.push(toNodeId);
     }
-    if (this.nodes[i].id === toNodeId) {
-      this.nodes[i].pointsTo.push( fromNodeId );
-    }
+    // if (this.nodes[i].id === toNodeId) {
+    //   this.nodes[i].pointsTo.push( fromNodeId );
+    // }
   }
 };
 
@@ -82,7 +83,6 @@ Graph.prototype.addEdge = function(fromNode, toNode) {
 Graph.prototype.removeEdge = function(fromNode, toNode) {
   let fromNodeId = this.findNode(fromNode);
   let toNodeId = this.findNode(toNode);
-
   //Loop through the nodes
   for (let i = 0; i < this.nodes.length; i++) {
     //When we find fromNodeId
@@ -95,14 +95,15 @@ Graph.prototype.removeEdge = function(fromNode, toNode) {
         //Splice the fromNodeId.pointsTo array at the calculated index
         return this.nodes[i].pointsTo.splice(index, 1);
       }
-    } if (this.nodes[i].id === toNodeId) {
-      let index = this.nodes[i].pointsTo.indexOf(fromNodeId);
-      if (index === -1) {
-        console.log('error: edge does not exist');
-      } else {
-        return this.nodes[i].pointsTo.splice(index, 1);
-      }
     }
+    // if (this.nodes[i].id === toNodeId) {
+    //   let index = this.nodes[i].pointsTo.indexOf(fromNodeId);
+    //   if (index === -1) {
+    //     console.log('error: edge does not exist');
+    //   } else {
+    //     return this.nodes[i].pointsTo.splice(index, 1);
+    //   }
+    // }
   }
 
   /*
@@ -114,8 +115,9 @@ Graph.prototype.removeEdge = function(fromNode, toNode) {
   */
 };
 
-Graph.prototype.alterNode = function( targetNode, func ){
-  //
+Graph.prototype.alterNodes = function( fromNode, toNode, func ) {
+  func(fromNode, toNode);
+  func(toNode, fromNode);
 }
 
 // Pass in a callback which will be executed on each node of the graph.
