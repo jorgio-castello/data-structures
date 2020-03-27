@@ -6,14 +6,20 @@ var HashTable = function() {
 
 HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this.limit);
-  this.hash.storage[index] = [k, v];
-   debugger;
+  this.hash.storage[index].push([k, v]);
   // we need to check if we are at 25% or 75% capacity after adding something
   // reHashTable() is in helper funcs but not defined
 };
 
 HashTable.prototype.retrieve = function(k) {
-  var index = getIndexBelowMaxForKey(k, this._limit);
+  var index = getIndexBelowMaxForKey(k, this.limit);
+  let bucket = this.hash.storage[index];
+  debugger;
+  for(let i = 0; i < bucket.length; i++) {
+    if(bucket[i][0] === k) {
+      return bucket[i][1];
+    }
+  }
 };
 
 HashTable.prototype.remove = function(k) {
