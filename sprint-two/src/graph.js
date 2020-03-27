@@ -73,9 +73,6 @@ Graph.prototype.addEdge = function(fromNode, toNode) {
       //push toNodeId into the found node's pointsTo array
       this.nodes[i].pointsTo.push(toNodeId);
     }
-    // if (this.nodes[i].id === toNodeId) {
-    //   this.nodes[i].pointsTo.push( fromNodeId );
-    // }
   }
 };
 
@@ -96,23 +93,7 @@ Graph.prototype.removeEdge = function(fromNode, toNode) {
         return this.nodes[i].pointsTo.splice(index, 1);
       }
     }
-    // if (this.nodes[i].id === toNodeId) {
-    //   let index = this.nodes[i].pointsTo.indexOf(fromNodeId);
-    //   if (index === -1) {
-    //     console.log('error: edge does not exist');
-    //   } else {
-    //     return this.nodes[i].pointsTo.splice(index, 1);
-    //   }
-    // }
   }
-
-  /*
-  function deleteOneWay( fromNode, toNode ){
-    // given a node, it deletes the appropriate entry in pointsTo
-  }
-  this.alterNode( fromNode, toNode, deleteOneWay );
-  this.alterNode( toNode, fromNode, deleteOneWay );
-  */
 };
 
 Graph.prototype.alterNodes = function( fromNode, toNode, func ) {
