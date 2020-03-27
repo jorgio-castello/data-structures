@@ -11,21 +11,23 @@
 //   limitedArray.set(3, 'hi');
 //   limitedArray.get(3); // returns 'hi'
 
-var LimitedArray = function(limit) {
-  var storage = [];
+var LimitedArray = function(limit) { //8
 
   var limitedArray = {};
+
+  limitedArray.storage = new Array(limit).fill([]);
+
   limitedArray.get = function(index) {
     checkLimit(index);
-    return storage[index];
+    return limitedArray.storage[index];
   };
   limitedArray.set = function(index, value) {
     checkLimit(index);
-    storage[index] = value;
+    limitedArray.storage[index] = value;
   };
   limitedArray.each = function(callback) {
-    for (var i = 0; i < storage.length; i++) {
-      callback(storage[i], i, storage);
+    for (var i = 0; i < limitedArray.storage.length; i++) {
+      callback(limitedArray.storage[i], i, limitedArray.storage);
     }
   };
 
@@ -37,7 +39,6 @@ var LimitedArray = function(limit) {
       throw new Error('Error trying to access an over-the-limit index');
     }
   };
-
   return limitedArray;
 };
 
@@ -54,6 +55,9 @@ var getIndexBelowMaxForKey = function(str, max) {
   return hash % max;
 };
 
+var reHashTable = function() {
+
+}
 /*
  * Complexity: What is the time complexity of the above functions?
  */
