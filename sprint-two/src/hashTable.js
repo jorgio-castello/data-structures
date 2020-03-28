@@ -10,7 +10,7 @@ HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this.limit);
   //k = "Steven", this.limit = 8, returns 3
 
-  var bucket = this.hash.storage[index];
+  var bucket = this.hash.get(index);
   // whatever's at 3 right now, which is empty
 
   if ( bucket.length === 0 ) { //true
@@ -29,8 +29,11 @@ HashTable.prototype.insert = function(k, v) {
     }
   }
   if ( !reassign ) {
-    this.hash.storage[index].push([k, v]);
+    // this.hash.storage[index].push([k, v]);
+    bucket.push([k, v]);
+    this.hash.set(index, bucket);
   }
+  debugger;q
 };
 
 HashTable.prototype.retrieve = function(k) {
