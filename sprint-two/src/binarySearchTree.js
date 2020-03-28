@@ -31,8 +31,39 @@ BinarySearchTree.prototype.insert = function(value) {
   return findInsertionPoint(this);
 };
 
-BinarySearchTree.prototype.contains = function(value) {};
-BinarySearchTree.prototype.depthFirstLog = function () {};
+BinarySearchTree.prototype.contains = function(value) {
+
+  let findNode = function(treeNode) {
+    if ( treeNode.value === value ) {
+      return true;
+    }
+    if ( treeNode.value > value ) {
+      if ( Boolean( treeNode.left ) ) {
+        return findNode( treeNode.left );
+      }
+      return false;
+    } else { /* treeNode.value is less than value */
+      if ( Boolean( treeNode.right ) ) {
+        return findNode( treeNode.right );
+      }
+      return false;
+    }
+  };
+  return findNode(this);
+};
+BinarySearchTree.prototype.depthFirstLog = function (func) {
+
+  let findNode = function(treeNode) {
+    func(treeNode.value);
+    if ( Boolean( treeNode.left ) ) {
+      findNode( treeNode.left );
+    }
+    if ( Boolean( treeNode.right ) ) {
+      findNode( treeNode.right );
+    }
+  };
+  findNode(this);
+};
 
 /*
  * Complexity: What is the time complexity of the above functions?
