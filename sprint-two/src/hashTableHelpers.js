@@ -15,19 +15,22 @@ var LimitedArray = function(limit) { //8
 
   var limitedArray = {};
 
-  limitedArray.storage = new Array(limit).fill([]);
+  var storage = [];
+  for ( var i = 0; i < limit; i++ ) {
+    storage.push([]);
+  }
 
   limitedArray.get = function(index) {
     checkLimit(index);
-    return limitedArray.storage[index];
+    return storage[index];
   };
   limitedArray.set = function(index, value) {
     checkLimit(index);
-    limitedArray.storage[index] = value;
+    storage[index] = value;
   };
   limitedArray.each = function(callback) {
-    for (var i = 0; i < limitedArray.storage.length; i++) {
-      callback(limitedArray.storage[i], i, limitedArray.storage);
+    for (var i = 0; i < storage.length; i++) {
+      callback(storage[i], i, storage);
     }
   };
 
@@ -55,9 +58,6 @@ var getIndexBelowMaxForKey = function(str, max) {
   return hash % max;
 };
 
-var reHashTable = function() {
-
-}
 /*
  * Complexity: What is the time complexity of the above functions?
  */

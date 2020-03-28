@@ -1,6 +1,9 @@
 
-var HashTable = function() {
-  this.limit = 8;
+var HashTable = function( size ) {
+  if ( size === undefined ) {
+    size = 8;
+  }
+  this.limit = size;
   this.hash = LimitedArray(this.limit);
   this.count = 0;
 };
@@ -15,9 +18,10 @@ HashTable.prototype.insert = function(k, v) {
 
   if ( bucket.length === 0 ) { //true
     this.count++; // count is 1
-    if (this.checkCapacity() > .75) {
+    if (this.checkCapacity() >= .75) {
       this.limit *= 2;
-      this.hash = this.increaseCapacity(this.limit);
+      index = getIndexBelowMaxForKey(k, this.limit);
+      this.hash = this.increaseCapacity();
     }
   }
   var reassign = false;
@@ -33,12 +37,11 @@ HashTable.prototype.insert = function(k, v) {
     bucket.push([k, v]);
     this.hash.set(index, bucket);
   }
-  debugger;q
 };
 
 HashTable.prototype.retrieve = function(k) {
   var index = getIndexBelowMaxForKey(k, this.limit);
-  let bucket = this.hash.storage[index];
+  let bucket = this.hash.get(index);
   for (let i = 0; i < bucket.length; i++) {
     if (bucket[i][0] === k) {
       return bucket[i][1];
@@ -48,7 +51,7 @@ HashTable.prototype.retrieve = function(k) {
 
 HashTable.prototype.remove = function(k) {
   var index = getIndexBelowMaxForKey(k, this.limit);
-  let bucket = this.hash.storage[index];
+  let bucket = this.hash.get(index);
   let bucketIdxToDelete = -1;
   for (let i = 0; i < bucket.length; i++) {
     if (bucket[i][0] === k) {
@@ -64,13 +67,13 @@ HashTable.prototype.checkCapacity = function() {
   return this.count / this.limit;
 };
 HashTable.prototype.increaseCapacity = function() {
-  let doubleSizedHash = LimitedArray(this.limit);
-  this.each( function(bucket) {
+  let doubleSizedHash = new HashTable(this.limit);
+  this.hash.each( function(bucket) {
     for (let i = 0; i < bucket.length; i++) {
-      doubleSizeHash.insert(bucket[i][0], bucket[i][1]);
+      doubleSizedHash.insert(bucket[i][0], bucket[i][1]);
     }
   });
-  return doubleSizedHash;
+  return doubleSizedHash.hash;
 };
 
 HashTable.prototype.decreaseCapacity = function () {};
