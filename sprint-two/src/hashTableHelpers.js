@@ -11,10 +11,15 @@
 //   limitedArray.set(3, 'hi');
 //   limitedArray.get(3); // returns 'hi'
 
-var LimitedArray = function(limit) {
-  var storage = [];
+var LimitedArray = function(limit) { //8
 
   var limitedArray = {};
+
+  var storage = [];
+  for ( var i = 0; i < limit; i++ ) {
+    storage.push([]);
+  }
+
   limitedArray.get = function(index) {
     checkLimit(index);
     return storage[index];
@@ -37,7 +42,6 @@ var LimitedArray = function(limit) {
       throw new Error('Error trying to access an over-the-limit index');
     }
   };
-
   return limitedArray;
 };
 
