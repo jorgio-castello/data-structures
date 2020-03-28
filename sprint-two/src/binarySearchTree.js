@@ -31,7 +31,13 @@ BinarySearchTree.prototype.insert = function(value) {
   return findInsertionPoint(this);
 };
 
-BinarySearchTree.prototype.contains = function(value) {
+BinarySearchTree.prototype.contains = function(value) { //reduce
+
+  // function isMatch( value ) {
+  //   return treeNode.value === value;
+  // };
+
+  // return depthFirstLog( isMatch );
 
   let findNode = function(treeNode) {
     if ( treeNode.value === value ) {
@@ -52,7 +58,6 @@ BinarySearchTree.prototype.contains = function(value) {
   return findNode(this);
 };
 BinarySearchTree.prototype.depthFirstLog = function (func) {
-
   let findNode = function(treeNode) {
     func(treeNode.value);
     if ( Boolean( treeNode.left ) ) {
@@ -65,6 +70,45 @@ BinarySearchTree.prototype.depthFirstLog = function (func) {
   findNode(this);
 };
 
+BinarySearchTree.prototype.reduce = function ( func , accumulator ) {
+  // a + b | undefined
+  let treeCopy = this;
+
+  //Re-assign the accumulator to the result of that callback function on the current accumulator and the current element of the tree
+  if (!accumulator) {
+    //If the initialAccumulator is undefined, then we should grab it from the root
+    accumulator = treeCopy.value; //5
+    treeCopy.value = null;        //null
+  }
+
+  let accumulatedSearchFunc = BinarySearchTree.prototype.depthFirstLog.bind(treeCopy);
+  //accumulatedSearch(anonymous function we created)
+  //We should be starting our tree traversal in a way that excludes the root
+  //BinarySearchTree.prototype.depthFirstLog.call(treeCopy, function())
+  accumulatedSearchFunc( function(value) {
+    //Deal with a value that is null
+    if(value) {
+      //If not null, deal with that as well
+      accumulator = func(accumulator, value);
+    }
+  });
+
+  return accumulator;
+}
+
+//reduce
+//callback function to reduce = sum all of the tree nodes
+// function(a,b) { return a + b }
+//depthFirstLog -
+
 /*
  * Complexity: What is the time complexity of the above functions?
  */
+//depthFirstLog(contains, 3)
+
+// arr.reduce((a,[b]) => {
+  //if(!accumulator) {
+    //accumulator = arr[0];
+    //arr = arr.slice(1)
+  //}
+//})
